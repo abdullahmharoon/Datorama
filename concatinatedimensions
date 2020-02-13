@@ -1,0 +1,48 @@
+var pn = [Publisher_Name];
+var sourceMed = "";
+var medium = "";
+
+if(pn contains 'CBS Sports')
+{
+    return 'CBS';
+}
+else if (pn contains 'Pluto TV')
+{
+	return 'Pluto';
+}
+else if (pn contains 'FOX')
+{
+	return 'Fox';
+}
+else if (pn contains 'Fox Sports')
+{
+	return 'Fox';
+}
+else if (pn contains 'Fox Hulu')
+{
+	return 'Fox';
+}
+else if (pn contains 'A&E Hulu')
+{
+	return 'A&E';
+}
+else if (pn contains 'ABC Hulu')
+{
+	return 'ABC';
+}
+else if (pn contains 'Turner')
+{
+	return 'Warner Media';
+}
+else if (pn contains 'NBC Hulu')
+{
+	return 'NBC';
+}
+else if (pn contains 'Turner Sports')
+{
+	return 'Warner Sports';
+}
+else
+{
+	return pn;
+}
