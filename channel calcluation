@@ -1,0 +1,77 @@
+var ds = [Data_Stream];
+var sourceMed = "";
+var medium = "";
+
+if(ds contains 'Trade Desk')
+{
+	return 'iMedia';
+}
+
+else if (ds contains 'Facebook-Ads' || ds contains 'Pinterest') 
+{
+	return "Social";
+}
+
+else if(ds contains 'Kenshoo' || ds contains 'Bing Ads')
+{
+	return [Channel_Campaign_Attribute];
+}
+
+else if(ds contains 'Google AdWords')
+{
+	if([Site_Name] contains 'Google Search Network')
+		{
+			return 'Paid Search';
+		}
+	else if([Site_Name] contains 'Google YouTube Videos')
+		{
+			return 'YouTube';
+		}
+	else
+		{
+			return [Site_Name];
+		}
+}
+else if(ds contains 'Google Analytics')
+{
+	sourceMed = LOWER([Web_Analytics_Site_Source/Medium]);
+	medium = LOWER(TRIM(EXTRACT(sourceMed,"/",1)));
+	
+	if(medium == 'social' || sourceMed contains 'facebook' || sourceMed contains 'pinterest')
+		{
+			return 'Social';
+		}
+	else if(sourceMed == 'google / cpc' || sourceMed == 'bing / cpc')
+		{
+			return 'Paid Search';
+		}
+	else if(sourceMed contains 'tradedesk')
+		{
+			return 'iMedia';
+		}
+	else if(sourceMed == '(direct) / (none)')
+		{
+			return 'Direct';
+		}
+	else if(medium == 'email')
+		{
+			return 'Email';
+		}
+	else if(medium == 'organic')
+		{
+			return 'Organic';
+		}
+	else
+		{
+			return 'Others';
+		}
+	
+}
+else if(ds contains 'Historical Data')
+	{
+		return [Historical_Channel];
+	}
+else 
+{
+	return 'Others';
+}
