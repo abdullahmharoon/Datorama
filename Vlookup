@@ -1,0 +1,1 @@
+VLOOKUP(csv'CAMPAIGN','CAMPAIGN_KEY',["%Flight_Passed"],true,true,{'TTD TOTAL CONNECT'})
