@@ -1,0 +1,99 @@
+var creativename = "";
+var campaignname = "";
+var campaigntype = "";
+var sourceMed = "";
+var medium = "";
+var utmcampaign = "";
+var utmcontent = "";
+
+if([Data_Stream] contains 'Facebook-Ads' || [Data_Stream] contains 'Pinterest')
+{
+	creativename = LOWER([Creative_Name]);
+
+	if(creativename contains 'heated razor' || creativename contains 'heatedrazor')
+		{
+			return 'Heated Razor';
+		}
+	else
+		{
+			return 'Evergreen';
+		}
+}
+
+else if([Data_Stream] contains 'The Trade Desk')
+{
+	campaignname = LOWER([Campaign_Name]);
+	creativename = LOWER([Creative_Name]);
+	
+	if(campaignname contains 'heated razor' || campaignname contains 'heatedrazor' || creativename contains 'heated razor' || creativename contains 'heatedrazor')
+		{
+			return 'Heated Razor'
+		}
+	else
+		{
+			return 'Evergreen'
+		}
+}
+
+else if([Data_Stream] contains 'Kenshoo' || [Data_Stream] contains 'Bing Ads' || [Data_Stream] contains 'Google AdWords')
+{
+	campaigntype = LOWER([Campaign_Type]);
+	
+	if(campaigntype contains 'heated razor' || campaigntype contains 'heatedrazor' )
+		{
+			return 'Heated Razor'
+		}
+	else
+		{
+			return 'Evergreen'
+		}
+}
+else if([Data_Stream] contains 'Google Analytics')
+{
+	sourceMed = LOWER([Web_Analytics_Site_Source/Medium]);
+	medium = LOWER(TRIM(EXTRACT(sourceMed,"/",1)));
+	utmcampaign = LOWER([Web_Analytics_Site_Campaign]);
+	utmcontent = LOWER([Web_Analytics_UTM_Content]);
+	
+	if(sourceMed == 'google / cpc' || sourceMed == 'bing / cpc')
+		{
+			if (utmcampaign contains 'heated razor' || utmcampaign contains 'heatedrazor')
+				{
+					return 'Heated Razor';
+				}
+			else
+				{
+					return 'Evergreen';
+				}
+		}
+	else if (medium == 'social' || sourceMed contains 'facebook' || sourceMed contains 'pinterest')
+		{
+			if (utmcampaign contains 'heated razor' || utmcampaign contains 'heatedrazor' || utmcontent contains 'heated razor' || utmcontent contains 'heatedrazor')
+				{
+					return 'Heated Razor';
+				}
+			else
+				{
+					return 'Evergreen';
+				}
+		}
+	else if(sourceMed contains 'tradedesk')
+		{
+			if (utmcampaign contains 'heated razor' || utmcampaign contains 'heatedrazor' || utmcontent contains 'heated razor' || utmcontent contains 'heatedrazor')
+				{
+					return 'Heated Razor';
+				}
+			else
+				{
+					return 'Evergreen';
+				}
+		}
+}
+else if([Data_Stream] contains 'Historical Data')
+	{
+		return [Historical_Product_Campaign];
+	}
+else
+{
+	return 'Others';
+}
